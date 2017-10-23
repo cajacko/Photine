@@ -2,7 +2,19 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import SlideRender from 'components/Slide/Slide.render';
 
+/**
+ * Business logic for the slide component. Set the loading status, get the
+ * image positions
+ *
+ * @type {Class}
+ */
 class Slide extends PureComponent {
+  /**
+   * Initiate the class. Set the default state and bind the methods.
+   *
+   * @param  {Object} props The pass props to the component
+   * @return {Void}       No return value
+   */
   constructor(props) {
     super(props);
 
@@ -22,6 +34,11 @@ class Slide extends PureComponent {
     this.setImage = this.setImage.bind(this);
   }
 
+  /**
+   * When the image has loaded, get the image position and turn off loading.
+   *
+   * @return {Void} No return value
+   */
   onload() {
     const style = this.getImagePosition();
 
@@ -30,6 +47,11 @@ class Slide extends PureComponent {
     this.setState(style);
   }
 
+  /**
+   * Get the center position for the image
+   *
+   * @return {Object} The image height, width, top and bottom margin
+   */
   getImagePosition() {
     let height = null;
     let width = null;
@@ -72,14 +94,31 @@ class Slide extends PureComponent {
     return { imageProps: { height, width, marginTop, marginLeft } };
   }
 
+  /**
+   * Bind the container component, so we can get its height and width later
+   *
+   * @param {Object} container The container reference
+   * @return {Void}            No return value
+   */
   setContainer(container) {
     this.container = container;
   }
 
+  /**
+   * Bind the image component, so we can get its height and width later
+   *
+   * @param {Object} image The image reference
+   * @return {Void}        No return value
+   */
   setImage(image) {
     this.image = image;
   }
 
+  /**
+   * Render the slide
+   *
+   * @return {Component} The react component to render
+   */
   render() {
     return (
       <SlideRender

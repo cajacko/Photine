@@ -2,7 +2,18 @@ import React, { PureComponent } from 'react';
 import SlideShowRender from 'components/SlideShow/SlideShow.render';
 import PropTypes from 'prop-types';
 
+/**
+ * Set the slideshow
+ *
+ * @type {Class}
+ */
 class SlideShow extends PureComponent {
+  /**
+   * Initiate the class. Set the initial state;
+   *
+   * @param  {Object} props The props passed to the component
+   * @return {Void}       No return value
+   */
   constructor(props) {
     super(props);
 
@@ -12,6 +23,11 @@ class SlideShow extends PureComponent {
     this.state = { slideIterator, slide };
   }
 
+  /**
+   * Set the slideshow interval and change slide on it
+   *
+   * @return {Void} No return value
+   */
   componentDidMount() {
     this.interval = setInterval(() => {
       let slideIterator = this.state.slideIterator + 1;
@@ -30,12 +46,22 @@ class SlideShow extends PureComponent {
     }, 5000);
   }
 
+  /**
+   * Remove the interval on unmount
+   *
+   * @return {Void} No return value
+   */
   componentWillUnmount() {
     if (this.interval) {
       clearInterval(this.interval);
     }
   }
 
+  /**
+   * Render the slideshow
+   *
+   * @return {Component} The react component to render
+   */
   render() {
     return <SlideShowRender slide={this.state.slide} />;
   }

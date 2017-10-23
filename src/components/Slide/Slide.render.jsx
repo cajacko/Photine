@@ -9,6 +9,11 @@ import { Container, Loading, Image } from 'components/Slide/Slide.style';
  * @type {Class}
  */
 class SlideRender extends PureComponent {
+  /**
+   * Render the slide component
+   *
+   * @return {Component} The React component to render
+   */
   render() {
     return (
       <Container innerRef={container => this.props.setContainer(container)}>
