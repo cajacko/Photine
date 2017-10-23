@@ -9,6 +9,7 @@
   "scripts": {
     "start": "nodemon src/server.js --exec babel-node",
     "webpack": "webpack-dev-server",
+    "webpack:build": "webpack --progress",
     "git": "babel-node scripts/git.js",
     "test": "npm run test:lint && npm run test:jest",
     "test:checklist": "checklist",
