@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Express server
+- EJS as a template language
 ### Changed
 ### Deprecated
 ### Removed
