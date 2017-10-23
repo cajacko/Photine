@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import { FONT_FAMILY } from 'constants/typography';
 
+export const Image = styled.img`
+  width: ${({ props }) => props.width || 'auto'};
+  height: ${({ props }) => props.height || 'auto'};
+  margin-top: ${({ props }) => props.marginTop || 'auto'};
+  margin-bottom: ${({ props }) => props.marginBottom || 'auto'};
+`;
+
 export const Container = styled.div`
   display: flex;
   flex: 1;
@@ -23,4 +30,5 @@ export const Loading = styled.div`
   align-items: center;
   font-family: ${FONT_FAMILY};
   font-size: 24px;
+  transition: opacity 0.5s;
 `;
