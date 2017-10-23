@@ -8,7 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Express server
 - EJS as a template language
+- Added dummy react entry file
+- Load javascript files
+
 ### Changed
+- Compile webpack files to public folder
+- yarn start now runs nodemon and webpack in watch mode
+
 ### Deprecated
 ### Removed
 ### Fixed

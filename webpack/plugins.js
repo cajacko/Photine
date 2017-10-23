@@ -44,16 +44,10 @@ module.exports = isProduction => [
   })(),
 
   // Support plugins that are not webpack 2 enabled yet
-  (() => {
-    if (isProduction) {
-      return new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false,
-      });
-    }
-
-    return () => {};
-  })(),
+  new webpack.LoaderOptionsPlugin({
+    minimize: true,
+    debug: false,
+  }),
 
   // Bundle analyzer lets you observe what each webpack budle is made up of
   // Generates a report.html file in the output folder
@@ -92,38 +86,21 @@ module.exports = isProduction => [
   }),
 
   // Improves logging in the console
-  (() => {
-    if (isProduction) {
-      return new webpack.HashedModuleIdsPlugin();
-    }
-
-    return () => {};
-  })(),
+  new webpack.HashedModuleIdsPlugin(),
 
   // // Better hashing than the standard
   new WebpackChunkHash(),
 
-  // Clean the production folder before building.
+  // Clean the output folder before building.
   // Otherwise we will build up redundant files.
   (() => {
-    if (isProduction) {
-      const paths = [path.resolve(__dirname, '../dist/prod')];
-      const options = { root: path.resolve(__dirname, '../') };
-      return new CleanWebpackPlugin(paths, options);
-    }
-
-    return () => {};
+    const paths = [path.resolve(__dirname, '../src/public/scripts')];
+    const options = { root: path.resolve(__dirname, '../') };
+    return new CleanWebpackPlugin(paths, options);
   })(),
 
   // Capture the manifest in a json file
   // This outputs a json file with each easy bundle name mapped to its hash
   // name. Then our templating engine can require the correct file
-  // Only in production though, as no hashes are used otherwise
-  (() => {
-    if (isProduction) {
-      return new ManifestPlugin();
-    }
-
-    return () => {};
-  })(),
+  new ManifestPlugin(),
 ];
