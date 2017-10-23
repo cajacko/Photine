@@ -1,10 +1,10 @@
+import 'src/dotenv';
 import express from 'express';
 import { compile } from 'ejs';
 import { readFileSync, readJson } from 'fs-extra';
 import { join } from 'path';
 
-const port = 3005;
-
+const port = process.env.WEPBACK_PORT || 3005;
 const app = express();
 
 const str = readFileSync(join(__dirname, 'index.html'), { encoding: 'utf8' });
