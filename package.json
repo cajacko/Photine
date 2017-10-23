@@ -7,9 +7,9 @@
     "trelloboardjson": "https://trello.com/b/MaHrFDdE/photine.json"
   },
   "scripts": {
-    "start": "nodemon src/server.js --exec babel-node",
-    "webpack": "webpack-dev-server",
-    "webpack:build": "webpack --progress",
+    "start": "multi \"yarn express:watch\" \"yarn webpack:watch\"",
+    "express:watch": "nodemon src/server.js --exec babel-node",
+    "webpack:watch": "webpack --progress --watch",
     "git": "babel-node scripts/git.js",
     "test": "npm run test:lint && npm run test:jest",
     "test:checklist": "checklist",
