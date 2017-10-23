@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - EJS as a template language
 - Added dummy react entry file
 - Load javascript files
+- Added a static slideshow
 
 ### Changed
 - Compile webpack files to public folder
