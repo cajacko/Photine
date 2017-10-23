@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FONT_FAMILY } from 'constants/typography';
+import { WHITE } from 'constants/colours';
 
 export const Image = styled.img`
   width: ${({ props }) => props.width || 'auto'};
@@ -23,7 +24,7 @@ export const Loading = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: white;
+  background: ${WHITE};
   display: flex;
   flex: 1;
   justify-content: center;
