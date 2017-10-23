@@ -3,14 +3,7 @@ import Slide from 'components/Slide/Slide.render';
 
 class SlideShowRender extends PureComponent {
   render() {
-    return (
-      <div>
-        <Slide />
-        <Slide />
-        <Slide />
-        <Slide />
-      </div>
-    );
+    return <div>{this.props.slides.map(image => <Slide image={image} />)}</div>;
   }
 }
 
