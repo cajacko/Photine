@@ -1,7 +1,7 @@
 {
   "name": "photine",
   "version": "0.1.0",
-  "description": "Open source digital photo frame",
+  "description": "Open source digital photo frame, powered by Framium",
   "main": "src/server.js",
   "config": {
     "trelloboardjson": "https://trello.com/b/MaHrFDdE/photine.json"
