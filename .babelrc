@@ -1,0 +1,23 @@
+{
+  "presets": ["es2015", "stage-2", "react"],
+  "plugins": [
+    "transform-react-jsx-source",
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "src": "./src",
+          "scripts": "./scripts",
+          "views": "./src/views",
+          "components": "./src/components",
+          "store": "./src/store",
+          "reducers": "./src/reducers",
+          "actions": "./src/actions",
+          "constants": "./src/constants"
+        },
+        "extensions": [".js", ".jsx"]
+      }
+    ]
+  ]
+}
