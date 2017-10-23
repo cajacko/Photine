@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SlideShow from 'components/SlideShow/SlideShow.render';
+import SlideShow from 'components/SlideShow/SlideShow.component';
 
 const mapStateToProps = ({ slides }) => ({ slides });
 
