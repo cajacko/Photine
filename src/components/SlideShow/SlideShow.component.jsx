@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import Slide from 'components/Slide/Slide.render';
+import SlideShowRender from 'components/SlideShow/SlideShow.render';
 import PropTypes from 'prop-types';
 
-class SlideShowRender extends PureComponent {
+class SlideShow extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -37,16 +37,12 @@ class SlideShowRender extends PureComponent {
   }
 
   render() {
-    if (!this.state.slide) {
-      return null;
-    }
-
-    return <Slide image={this.state.slide} />;
+    return <SlideShowRender slide={this.state.slide} />;
   }
 }
 
-SlideShowRender.propTypes = {
+SlideShow.propTypes = {
   slides: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default SlideShowRender;
+export default SlideShow;

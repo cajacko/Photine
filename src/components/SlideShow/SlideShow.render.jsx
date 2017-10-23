@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import Slide from 'components/Slide/Slide.render';
+import Slide from 'components/Slide/Slide.component';
 import PropTypes from 'prop-types';
 
 class SlideShow extends PureComponent {
