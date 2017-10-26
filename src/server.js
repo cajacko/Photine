@@ -7,18 +7,19 @@ import { join } from 'path';
 const port = process.env.WEPBACK_PORT || 3005;
 const app = express();
 
-const str = readFileSync(join(__dirname, 'index.html'), { encoding: 'utf8' });
-const template = compile(str);
-
 app.use(express.static(join(__dirname, 'public')));
 
 app.get('*', (req, res) => {
+  const str = readFileSync(join(__dirname, 'index.html'), { encoding: 'utf8' });
+  const template = compile(str);
+
   readJson(join(__dirname, 'public/scripts/manifest.json')).then((manifest) => {
     const html = template({
       scripts: {
         manifest: `/scripts/${manifest['manifest.js']}`,
         vendor: `/scripts/${manifest['vendor.js']}`,
         photine: `/scripts/${manifest['photine.js']}`,
+        serviceWorker: `/scripts/${manifest['serviceWorker.js']}`,
       },
     });
 

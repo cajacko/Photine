@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Loading, Image } from 'components/Slide/Slide.style';
+import { Container, Loading, Image, Error } from 'components/Slide/Slide.style';
 
 /**
  * Render an image as a slide. Making sure the image fills the space it has.
@@ -18,6 +18,7 @@ class SlideRender extends PureComponent {
     return (
       <Container innerRef={container => this.props.setContainer(container)}>
         <Loading loading={this.props.loading}>Loading</Loading>
+        {this.props.error && <Error>{this.props.error}</Error>}
 
         <Image
           props={this.props.imageProps}
@@ -25,6 +26,7 @@ class SlideRender extends PureComponent {
           src={this.props.image}
           alt="Slide"
           onLoad={this.props.onload}
+          onError={this.props.onerror}
         />
       </Container>
     );
@@ -43,6 +45,12 @@ SlideRender.propTypes = {
     marginTop: PropTypes.string,
     marginLeft: PropTypes.string,
   }).isRequired,
+  onerror: PropTypes.func.isRequired,
+  error: PropTypes.string,
+};
+
+SlideRender.defaultProps = {
+  error: null,
 };
 
 export default SlideRender;
