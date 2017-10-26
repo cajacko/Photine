@@ -2,6 +2,17 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import SlideRender from 'components/Slide/Slide.render';
 
+const defaultState = {
+  loading: true,
+  error: null,
+  imageProps: {
+    height: null,
+    width: null,
+    marginTop: null,
+    marginLeft: null,
+  },
+};
+
 /**
  * Business logic for the slide component. Set the loading status, get the
  * image positions
@@ -18,20 +29,34 @@ class Slide extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: true,
-      imageProps: {
-        height: null,
-        width: null,
-        marginTop: null,
-        marginLeft: null,
-      },
-    };
+    this.state = defaultState;
 
     this.onload = this.onload.bind(this);
+    this.onerror = this.onerror.bind(this);
     this.getImagePosition = this.getImagePosition.bind(this);
     this.setContainer = this.setContainer.bind(this);
     this.setImage = this.setImage.bind(this);
+  }
+
+  /**
+   * Reset the state if the image url has changed
+   *
+   * @param  {Object} props The next props being passed
+   * @return {Void}       No return value
+   */
+  componentWillReceiveProps(props) {
+    if (props.image !== this.props.image) {
+      this.setState(defaultState);
+    }
+  }
+
+  /**
+   * On image load error change the state to indicate the error
+   *
+   * @return {Void} No return value
+   */
+  onerror() {
+    this.setState({ error: 'Error', loading: false });
   }
 
   /**
@@ -43,6 +68,7 @@ class Slide extends PureComponent {
     const style = this.getImagePosition();
 
     style.loading = false;
+    style.error = null;
 
     this.setState(style);
   }
@@ -126,8 +152,10 @@ class Slide extends PureComponent {
         setContainer={this.setContainer}
         setImage={this.setImage}
         loading={this.state.loading}
+        error={this.state.error}
         imageProps={this.state.imageProps}
         onload={this.onload}
+        onerror={this.onerror}
       />
     );
   }

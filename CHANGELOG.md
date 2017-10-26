@@ -11,10 +11,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added dummy react entry file
 - Load javascript files
 - Added a static slideshow
+- Service worker to cache all resources from this origin
+- Show an error message if an image fails to load
 
 ### Changed
 - Compile webpack files to public folder
 - yarn start now runs nodemon and webpack in watch mode
+- Dummy images come from the same origin now
 
 ### Deprecated
 ### Removed
