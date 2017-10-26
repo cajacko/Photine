@@ -38,12 +38,23 @@ class Slide extends PureComponent {
     this.setImage = this.setImage.bind(this);
   }
 
+  /**
+   * Reset the state if the image url has changed
+   *
+   * @param  {Object} props The next props being passed
+   * @return {Void}       No return value
+   */
   componentWillReceiveProps(props) {
     if (props.image !== this.props.image) {
       this.setState(defaultState);
     }
   }
 
+  /**
+   * On image load error change the state to indicate the error
+   *
+   * @return {Void} No return value
+   */
   onerror() {
     this.setState({ error: 'Error', loading: false });
   }

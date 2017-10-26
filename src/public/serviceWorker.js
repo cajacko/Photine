@@ -1,9 +1,13 @@
+// Service worker to cache resources for offline use
+
+// Cache the index page on install
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open('airhorner').then(cache => cache.addAll(['/', '/index.html']))
   );
 });
 
+// Cache all resources from this origin
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 

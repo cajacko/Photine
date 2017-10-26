@@ -10,6 +10,7 @@ const app = express();
 
 app.use(express.static(join(__dirname, 'public')));
 
+// Route all media requests through pexels.com for dummy images
 app.get('/media/*', (req, res) => {
   let url = req.originalUrl.replace('/media/', '');
   url = `https://images.pexels.com/photos/${url}`;
@@ -19,6 +20,7 @@ app.get('/media/*', (req, res) => {
     .then(buffer => res.send(buffer));
 });
 
+// For all other requests, show the index page
 app.get('*', (req, res) => {
   const str = readFileSync(join(__dirname, 'index.html'), { encoding: 'utf8' });
   const template = compile(str);
