@@ -66,6 +66,10 @@
   "globals": {
     "fetch": false,
     "document": false,
-    "window": false
+    "window": false,
+    "location": false,
+    "self": false,
+    "caches": false,
+    "URL": false,
   }
 }

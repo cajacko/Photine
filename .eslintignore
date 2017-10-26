@@ -4,4 +4,4 @@ node_modules
 
 build/*
 dist/*
-src/public/*
+src/public/scripts/*
