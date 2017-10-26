@@ -5,7 +5,9 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('.js')) {
+  const url = new URL(event.request.url);
+
+  if (url.origin === location.origin) {
     event.respondWith(
       caches.match(event.request).then(
         response =>

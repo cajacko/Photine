@@ -3,11 +3,21 @@ import express from 'express';
 import { compile } from 'ejs';
 import { readFileSync, readJson } from 'fs-extra';
 import { join } from 'path';
+import fetch from 'node-fetch';
 
 const port = process.env.WEPBACK_PORT || 3005;
 const app = express();
 
 app.use(express.static(join(__dirname, 'public')));
+
+app.get('/media/*', (req, res) => {
+  let url = req.originalUrl.replace('/media/', '');
+  url = `https://images.pexels.com/photos/${url}`;
+
+  return fetch(url)
+    .then(response => response.buffer())
+    .then(buffer => res.send(buffer));
+});
 
 app.get('*', (req, res) => {
   const str = readFileSync(join(__dirname, 'index.html'), { encoding: 'utf8' });
