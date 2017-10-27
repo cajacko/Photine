@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 class HomeViewRender extends PureComponent {
   render() {
-    return <div>Yeah</div>;
+    return <a href="/auth/google">Sign In with Google</a>;
   }
 }
 
