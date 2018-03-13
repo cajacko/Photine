@@ -1,9 +1,0 @@
-{
-  "ignore": [
-    "*.test.js",
-    "src/actions/*",
-    "src/components/*",
-    "src/reducers/*",
-    "src/store/*"
-  ]
-}
