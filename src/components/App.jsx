@@ -19,9 +19,10 @@ class App extends Component {
     fetch("https://www.instagram.com/charlie_a_jackson/?__a=1")
       .then(res => res.json())
       .then(json =>
-        json.graphql.user.edge_owner_to_timeline_media.edges.map(
-          edge => edge.node.display_url
-        )
+        json.graphql.user.edge_owner_to_timeline_media.edges
+          .filter(edge => !edge.node.is_video)
+          .map(edge => edge.node.display_url)
+          .sort(() => 0.5 - Math.random())
       )
       .then(images => this.setState({ images, state: "SUCCEEDED" }))
       .then(() => {
