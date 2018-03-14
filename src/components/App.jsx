@@ -34,7 +34,7 @@ class App extends Component {
           }
 
           this.setState({ displayIndex });
-        }, 3000);
+        }, 20000);
       })
       .catch(err => {
         console.error(err);
