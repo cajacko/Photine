@@ -16,14 +16,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://www.instagram.com/charlie_a_jackson/?__a=1")
-      .then(res => res.json())
-      .then(json =>
-        json.graphql.user.edge_owner_to_timeline_media.edges
-          .filter(edge => !edge.node.is_video)
-          .map(edge => edge.node.display_url)
-          .sort(() => 0.5 - Math.random())
-      )
+    setTimeout(() => window.location.reload(), 30 * 60 * 1000);
+
+    Promise.all([
+      this.fetchInstagramPhotos("charlie_a_jackson"),
+      this.fetchInstagramPhotos("vikibell")
+    ])
+      .then(response => [].concat(response[0].photos, response[1].photos))
+      .then(photos => photos.sort(() => 0.5 - Math.random()))
       .then(images => this.setState({ images, state: "SUCCEEDED" }))
       .then(() => {
         setInterval(() => {
@@ -44,6 +44,24 @@ class App extends Component {
           message: err.message || "Undefined error"
         });
       });
+  }
+
+  fetch;
+
+  fetchInstagramPhotos(username, cursor) {
+    const url = cursor
+      ? `https://www.instagram.com/${username}/?__a=1&max_id=${cursor}`
+      : `https://www.instagram.com/${username}/?__a=1`;
+
+    return fetch(url)
+      .then(res => res.json())
+      .then(json => ({
+        photos: json.graphql.user.edge_owner_to_timeline_media.edges
+          .filter(edge => !edge.node.is_video)
+          .map(edge => edge.node.display_url),
+        cursor:
+          json.graphql.user.edge_owner_to_timeline_media.page_info.end_cursor
+      }));
   }
 
   render() {
