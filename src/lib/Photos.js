@@ -2,12 +2,28 @@
 
 class Photos {
   static get() {
-    return Promise.all([
-      Photos.fetchInstagramPhotos("charlie_a_jackson"),
-      Photos.fetchInstagramPhotos("vikibell")
-    ])
-      .then(response => [].concat(response[0].photos, response[1].photos))
-      .then(photos => photos.sort(() => 0.5 - Math.random()));
+    return Photos.fetchInstagramPhotosFromMultipleAccounts([
+      "charlie_a_jackson",
+      "vikibell"
+    ]);
+  }
+
+  static fetchInstagramPhotosFromMultipleAccounts(accounts) {
+    const promises = [];
+
+    accounts.forEach(account => {
+      promises.push(Photos.fetchInstagramPhotos(account));
+    });
+
+    return Promise.all(promises).then(responses => {
+      const photos = [];
+
+      responses.forEach(({ photos }) => {
+        photos.concat(photos);
+      });
+
+      return photos.sort(() => 0.5 - Math.random());
+    });
   }
 
   static fetchInstagramPhotos(username, cursor) {
