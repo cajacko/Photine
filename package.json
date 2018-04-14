@@ -14,17 +14,25 @@
     "build:js": "react-scripts build",
     "build": "npm-run-all build:css build:js",
     "build:css": "node-sass-chokidar src/ -o src/",
-    "watch:css":
-      "npm run build:css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch:css": "npm run build:css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "eject": "react-scripts eject",
     "serve": "yarn run build && firebase serve",
     "precommit": "lint-staged",
     "prettify": "prettier-eslint --write 'src/**/*.{js,jsx}'"
   },
   "lint-staged": {
-    "*.js": ["prettier-eslint --write", "git add"],
-    "*.jsx": ["prettier-eslint --write", "git add"],
-    "*.md": ["prettier-eslint --write", "git add"]
+    "*.js": [
+      "prettier-eslint --write",
+      "git add"
+    ],
+    "*.jsx": [
+      "prettier-eslint --write",
+      "git add"
+    ],
+    "*.md": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "firebase-tools": "^3.17.4"
@@ -63,6 +71,7 @@
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.0",
     "react-slick": "^0.18.1",
+    "shuffle-array": "^1.0.1",
     "slick-carousel": "^1.8.1"
   }
 }

@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
+import shuffle from "shuffle-array";
 import "./App.css";
 import Photos from "../lib/Photos";
 
@@ -20,6 +21,7 @@ class App extends Component {
     setTimeout(() => window.location.reload(), 30 * 60 * 1000);
 
     Photos.get()
+      .then(images => shuffle(images).slice(0, 100))
       .then(images => this.setState({ images, state: "SUCCEEDED" }))
       .then(() => {
         setInterval(() => {
