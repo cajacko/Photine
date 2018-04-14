@@ -1,5 +1,7 @@
 // @flow
 
+const storage = window.localStorage;
+
 class Photos {
   static get() {
     if (!process.env.REACT_APP_PHOTOS_URL) {
@@ -8,9 +10,57 @@ class Photos {
       );
     }
 
+    const lastCached = storage.getItem("lastCached");
+
+    if (lastCached) {
+      const timeSinceLastCached = new Date().getTime() - lastCached;
+
+      if (timeSinceLastCached < 60 * 60 * 1000) {
+        const photos = Photos.getCachedPhotos();
+
+        if (photos) {
+          return Promise.resolve(photos);
+        }
+      }
+    }
+
     return fetch(process.env.REACT_APP_PHOTOS_URL)
       .then(res => res.json())
-      .then(({ photos }) => photos);
+      .then(({ photos }) => {
+        if (!photos || !photos.length) {
+          const cachedPhotos = Photos.getCachedPhotos();
+
+          if (cachedPhotos) return cachedPhotos;
+
+          throw new Error("No photos returned or found in cache");
+        }
+
+        storage.setItem("lastCached", new Date().getTime());
+        storage.setItem("photos", JSON.stringify(photos));
+
+        return photos;
+      })
+      .catch(e => {
+        const cachedPhotos = Photos.getCachedPhotos();
+
+        if (cachedPhotos) return cachedPhotos;
+
+        console.error(e);
+
+        throw new Error(
+          "Error fetching photos and no photos in cache. Check logs"
+        );
+      });
+  }
+
+  static getCachedPhotos() {
+    const photos = storage.getItem("photos");
+
+    if (photos) {
+      return JSON.parse(photos);
+    }
+
+    return null;
   }
 
   static fetchFromInstagram() {
