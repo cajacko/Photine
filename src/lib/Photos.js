@@ -2,6 +2,18 @@
 
 class Photos {
   static get() {
+    if (!process.env.REACT_APP_PHOTOS_URL) {
+      return Promise.reject(
+        new Error("REACT_APP_PHOTOS_URL env var is not set")
+      );
+    }
+
+    return fetch(process.env.REACT_APP_PHOTOS_URL)
+      .then(res => res.json())
+      .then(({ photos }) => photos);
+  }
+
+  static fetchFromInstagram() {
     return Photos.fetchInstagramPhotosFromMultipleAccounts([
       "charlie_a_jackson",
       "vikibell"
