@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import "./App.css";
+import Photos from "../lib/Photos";
 
 class App extends Component {
   constructor(props) {
@@ -18,12 +19,7 @@ class App extends Component {
   componentDidMount() {
     setTimeout(() => window.location.reload(), 30 * 60 * 1000);
 
-    Promise.all([
-      this.fetchInstagramPhotos("charlie_a_jackson"),
-      this.fetchInstagramPhotos("vikibell")
-    ])
-      .then(response => [].concat(response[0].photos, response[1].photos))
-      .then(photos => photos.sort(() => 0.5 - Math.random()))
+    Photos.get()
       .then(images => this.setState({ images, state: "SUCCEEDED" }))
       .then(() => {
         setInterval(() => {
@@ -44,24 +40,6 @@ class App extends Component {
           message: err.message || "Undefined error"
         });
       });
-  }
-
-  fetch;
-
-  fetchInstagramPhotos(username, cursor) {
-    const url = cursor
-      ? `https://www.instagram.com/${username}/?__a=1&max_id=${cursor}`
-      : `https://www.instagram.com/${username}/?__a=1`;
-
-    return fetch(url)
-      .then(res => res.json())
-      .then(json => ({
-        photos: json.graphql.user.edge_owner_to_timeline_media.edges
-          .filter(edge => !edge.node.is_video)
-          .map(edge => edge.node.display_url),
-        cursor:
-          json.graphql.user.edge_owner_to_timeline_media.page_info.end_cursor
-      }));
   }
 
   render() {
